@@ -3,26 +3,75 @@
 .comment_container {
   display: grid;
   grid-template-columns: 0.1fr 1fr;
-  grid-template-rows: 0.1fr 1fr;
-  width: 600px;
-  height: 150px;
-  border: 1px solid black;
+  grid-template-rows: 0.4fr 1fr;
+  gap: 10px;
+  width: 800px;
+  min-height: 150px;
+  background-color: $white;
+  padding: 20px;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
 .comment_votes {
+  overflow: hidden;
+  grid-row: 1 / span 2;
+  justify-self: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  grid-row: 1 / span 2;
-  gap: 15px;
+  gap: 10px;
+  width: 45px;
+  height: 125px;
   border-radius: 15px;
   background-color: $light_gray;
 }
 
 .comment_header {
+  overflow: hidden;
   grid-row: 1;
   grid-column: 2;
   display: flex;
-  border: 1px solid red;
+  align-items: center;
+  gap: 10px;
+}
+
+.comment_header__profile_img_div,
+.comment_header__reply_img_div {
+  width: 30px;
+  display: grid;
+  place-items: center;
+}
+
+.comment_header__profile_pic {
+  width: 100%;
+  object-fit: contain;
+}
+
+.comment_header__comment_time {
+  opacity: 0.5;
+}
+
+.comment_header__profile_name {
+  font-weight: $bold;
+}
+
+.comment_header__reply {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.comment_header__reply_text,
+.comment_votes__number {
+  color: $moderate_blue;
+  font-weight: $bold;
+}
+
+.comment_content {
+  grid-row: 2;
+  grid-column: 2;
+  opacity: 0.5;
+  line-height: 1.5em;
 }

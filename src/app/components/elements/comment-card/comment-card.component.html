@@ -20,7 +20,7 @@
   </div>
 
   <div class="comment_header">
-    <div class="comment_header__img_div">
+    <div class="comment_header__profile_img_div">
       <img
         class="comment_header__profile_pic"
         [src]="img_path + 'avatars/image-amyrobson.png'"
@@ -32,20 +32,18 @@
 
     <p class="comment_header__comment_time">1 month ago</p>
 
-    <div class="comment_header__img_div">
-      <img
-        class="comment_header__reply_btn"
-        [src]="img_path + 'icon-reply.svg'"
-        alt="reply comment button"
-      />
+    <div class="comment_header__reply">
+      <div class="comment_header__reply_img_div">
+        <img [src]="img_path + 'icon-reply.svg'" alt="reply comment button" />
+      </div>
+
+      <p class="comment_header__reply_text">Reply</p>
     </div>
   </div>
 
-  <div class="comment_content">
-    <p>
-      Impressive! Though it seems the drag feature could be improved. But
-      overall it looks incredible. You've nailed the design and the
-      responsiveness at various breakpoints works really well.
-    </p>
-  </div>
+  <p class="comment_content">
+    Impressive! Though it seems the drag feature could be improved. But overall
+    it looks incredible. You've nailed the design and the responsiveness at
+    various breakpoints works really well.
+  </p>
 </section>
