@@ -1,0 +1,51 @@
+<section class="comment_container">
+  <div class="comment_votes">
+    <div class="comment_votes__img_div">
+      <img
+        class="comment_votes__upvote_icon"
+        [src]="img_path + 'icon-plus.svg'"
+        alt="upvote comment button"
+      />
+    </div>
+
+    <div class="comment_votes__number">5</div>
+
+    <div class="comment_votes__img_div">
+      <img
+        class="comment_votes__downvote_icon"
+        [src]="img_path + 'icon-minus.svg'"
+        alt="downvote comment button"
+      />
+    </div>
+  </div>
+
+  <div class="comment_header">
+    <div class="comment_header__img_div">
+      <img
+        class="comment_header__profile_pic"
+        [src]="img_path + 'avatars/image-amyrobson.png'"
+        alt=""
+      />
+    </div>
+
+    <p class="comment_header__profile_name">amyrobson</p>
+
+    <p class="comment_header__comment_time">1 month ago</p>
+
+    <div class="comment_header__img_div">
+      <img
+        class="comment_header__reply_btn"
+        [src]="img_path + 'icon-reply.svg'"
+        alt="reply comment button"
+      />
+    </div>
+  </div>
+
+  <div class="comment_content">
+    <p>
+      Impressive! Though it seems the drag feature could be improved. But
+      overall it looks incredible. You've nailed the design and the
+      responsiveness at various breakpoints works really well.
+    </p>
+  </div>
+</section>

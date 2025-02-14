@@ -1,0 +1,28 @@
+@import "variables.scss";
+
+.comment_container {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr;
+  grid-template-rows: 0.1fr 1fr;
+  width: 600px;
+  height: 150px;
+  border: 1px solid black;
+}
+
+.comment_votes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-row: 1 / span 2;
+  gap: 15px;
+  border-radius: 15px;
+  background-color: $light_gray;
+}
+
+.comment_header {
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  border: 1px solid red;
+}

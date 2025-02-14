@@ -1,27 +1,40 @@
-# Comments
+<h1 align="center"> Comments 💻 </h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+## Status 🔧
 
-## Development server
+Currently under development.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Requirements 📄
 
-## Code scaffolding
+FrontendMentor challenge requirements:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Create, Read, Update, and Delete comments and replies
+- Upvote and downvote comments
+- View the optimal layout for the app depending on the device's screen size
+- See hover states for all interactive elements on the page
+- Bonus: If you're building a purely front-end project, use localStorage to save the current state in the browser that persists when the browser is refreshed
 
-## Build
+## Alerts ⚡
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- > [FrontendMentor Challenge Page](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9)
 
-## Running unit tests
+- > [Live Project Link](https://comments1.netlify.app/)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Goal 📌
 
-## Running end-to-end tests
+- Project to be added to my angular portfolio.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+---
 
-## Further help
+<h3 align="center"> Home 📷 </h3>
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<div align="center">
+    <img height="300em" src="./src/assets/showcase.png">
+</div>
+
+<h3 align="center"> Tecnologias utilizadas 🤖 </h3>
+
+> <div align="center">
+>   <img src="https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white">
+>   <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" >
+> </div>

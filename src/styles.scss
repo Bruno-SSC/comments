@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+@import "variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body {
+  background-color: $very_light_gray;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  font-size: 16px;
+  font-family: $font_family;
+}
