@@ -5,3 +5,4 @@ com1
 com2
     added the replies section.
 com3
+    added the add_comment component
