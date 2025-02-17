@@ -6,3 +6,5 @@ com2
     added the replies section.
 com3
     added the add_comment component
+com4
+    except for the modal, all else is superficially done for both mobile and desktop. 

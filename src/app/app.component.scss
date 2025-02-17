@@ -1,5 +1,12 @@
 @import "variables.scss";
 
+@mixin centered_col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 .attribution {
   font-size: 11px;
   text-align: center;
@@ -9,32 +16,36 @@
   color: hsl(228, 45%, 44%);
 }
 
-@mixin layout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
 .layout_container {
-  @include layout();
-  margin: auto;
-  padding: 50px;
-  width: 800px;
+  @include centered_col();
+  padding: 40px 20px;
+  width: 100vw;
 }
 
 .comments_section,
 .replies_section {
-  @include layout();
+  @include centered_col();
 }
 
 .replies_section {
   align-self: flex-end;
-  padding-left: 40px;
-  margin-left: 50px;
+  padding-left: 10px;
   border-left: 1px solid rgba($color: #000000, $alpha: 0.2);
 }
 
-.add_comment{
+.add_comment {
   width: 100%;
+}
+
+@media screen and (min-width: $tablet_max) {
+  .layout_container {
+    margin: auto;
+    padding: 50px;
+    width: 800px;
+  }
+
+  .replies_section {
+    padding-left: 40px;
+    margin-left: 50px;
+  }
 }
