@@ -1,33 +1,17 @@
 import {
   animate,
+  animateChild,
   group,
   query,
   stagger,
+  state,
   style,
   transition,
   trigger,
 } from '@angular/animations';
+import { head } from 'lodash';
 
 // ? Effects
-
-const move_in = [
-  style({ transform: 'translateY(100vh)' }),
-  animate('600ms ease-in'),
-  style({ transform: 'translateY(0vh)' }),
-];
-
-const move_out = [
-  animate('600ms ease-in'),
-  style({ transform: 'translateY(100vh)' }),
-];
-
-const fade_in = [
-  style({ opacity: 0 }),
-  animate('500ms ease'),
-  style({ opacity: 1 }),
-];
-
-const fade_out = [animate('500ms ease'), style({ opacity: 0 })];
 
 const ladder_effect = [
   style({ opacity: 0, transform: 'translateY(-100px)' }),
@@ -46,20 +30,72 @@ export const page_animation = trigger('page_animation', [
 ]);
 
 export const item_fade = trigger('item_fade', [
-  transition(':enter', fade_in),
-  transition(':leave', fade_out),
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('500ms ease'),
+    style({ opacity: 1 }),
+  ]),
+  transition(':leave', [animate('500ms ease'), style({ opacity: 0 })]),
+]);
+
+export const reply_move = trigger('reply_move', [
+  transition(':enter', [
+    query('.comment_container', [
+      style({ transform: 'translateY(-150px)', opacity: 0 }),
+      animate('1500ms ease-in'),
+      style({ transform: 'translateY(0vh)', opacity: 1 }),
+    ]),
+  ]),
+
+  transition(':leave', [
+    query('.comment_container', [
+      animate('1500ms ease-out'),
+      style({ transform: 'translateY(-150px)', opacity: 0 }),
+    ]),
+  ]),
+]);
+
+export const resize = trigger('resize', [
+  transition(':enter', [
+    group([
+      query('@reply_move', animateChild()),
+      query(':self', [
+        style({ height: 0 }),
+        animate('1500ms ease-in-out'),
+        style({ height: '*' }),
+      ]),
+    ]),
+  ]),
+
+  transition(':leave', [
+    group([
+      query('@reply_move', animateChild()),
+      query(':self', [animate('1500ms ease-in-out'), style({ height: '0' })]),
+    ]),
+  ]),
 ]);
 
 export const modal_pop = trigger('modal_pop', [
   transition('void => *', [
-    query('.modal_container, .modal_background', fade_in),
+    query('.modal_container, .modal_background', [
+      style({ opacity: 0 }),
+      animate('500ms ease'),
+      style({ opacity: 1 }),
+    ]),
   ]),
   transition('* => void', [
-    query('.modal_container, .modal_background', fade_out),
+    query('.modal_container, .modal_background', [
+      animate('500ms ease'),
+      style({ opacity: 0 }),
+    ]),
   ]),
 ]);
 
 export const btn_fade = trigger('btn_fade', [
-  transition(':enter', fade_in),
-  transition(':leave', fade_out),
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('500ms ease'),
+    style({ opacity: 1 }),
+  ]),
+  transition(':leave', [animate('500ms ease'), style({ opacity: 0 })]),
 ]);

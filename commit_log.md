@@ -12,3 +12,5 @@ com5
     added the modal.
 com6
     the score number now changes, added the specific comment elements for the current active user, added the hover effect on clicable elements, defined the comments and user data and the comments_model service and maybe some more minor adjusts.
+com7
+    added the reply action and even the animation for it but it still need some work.

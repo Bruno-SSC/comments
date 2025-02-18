@@ -34,7 +34,11 @@
   </div>
 
   <div class="comment_actions">
-    <div class="comment_reply_btn" *ngIf="!active_user">
+    <div
+      class="comment_reply_btn"
+      *ngIf="!active_user"
+      (click)="reply_action = !reply_action"
+    >
       <div class="comment_reply_btn__img_div">
         <img [src]="img_path + 'icon-reply.svg'" alt="reply comment button" />
       </div>
@@ -63,4 +67,9 @@
     <span class="comment_text__reply_mention"> {{ reply_mention }} </span>
     {{ comment.content }}
   </div>
+</section>
+
+<!-- TODO: this element resizes at the same time the reply moves | the reply actino starts here -->
+<section class="hidden_reply" *ngIf="reply_action" @resize>
+  <app-add-comment @reply_move></app-add-comment>
 </section>

@@ -1,5 +1,9 @@
 @import "variables.scss";
 
+.hidden_reply {
+  margin-top: 10px;
+}
+
 .comment_container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -11,6 +15,7 @@
   padding: 20px;
   font-size: 1rem;
   border-radius: 5px;
+  z-index: 5;
 }
 
 .comment_votes {
