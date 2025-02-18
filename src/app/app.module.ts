@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommentCardComponent } from './components/elements/comment-card/comment-card.component';
 import { AddCommentComponent } from './components/elements/add-comment/add-comment.component';
+import { DeleteConfirmationComponent } from './components/elements/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
-  declarations: [AppComponent, CommentCardComponent, AddCommentComponent],
+  declarations: [AppComponent, CommentCardComponent, AddCommentComponent, DeleteConfirmationComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
