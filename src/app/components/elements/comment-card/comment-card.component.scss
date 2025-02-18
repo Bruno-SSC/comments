@@ -29,8 +29,11 @@
 }
 
 .comment_votes__img_div {
+  cursor: pointer;
   display: grid;
   place-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .comment_header {
@@ -54,34 +57,47 @@
   font-weight: $bold;
 }
 
-.comment_reply_btn {
+.comment_actions {
   grid-row: 3;
   grid-column: 2;
   display: flex;
   gap: 10px;
-  align-self: center;
   justify-self: end;
 }
 
-.comment_header__profile_img_div,
-.comment_header__reply_img_div {
+.comment_reply_btn,
+.comment_delete_btn,
+.comment_edit_btn {
+  display: flex;
+  gap: 10px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.comment_header__profile_img_div {
   width: 30px;
   display: grid;
   place-items: center;
 }
 
 .comment_reply_btn,
+.comment_edit_btn,
 .comment_votes__number {
   color: $moderate_blue;
   font-weight: $bold;
 }
 
-
-.comment_content {
-  grid-row: 2 ;
+.comment_text {
+  grid-row: 2;
   grid-column: 1 / span 2;
-  opacity: 0.5;
+  color: $grayish_blue;
   line-height: 1.5em;
+}
+
+.comment_text__reply_mention {
+  color: $moderate_blue;
+  font-weight: $bold;
+  opacity: 1;
 }
 
 @media screen and (min-width: $tablet_max) {
@@ -108,12 +124,13 @@
     width: 30px;
   }
 
-  .comment_reply_btn {
+  .comment_actions {
     grid-row: 1;
     grid-column: 3;
+    gap: 15px;
   }
 
-  .comment_content {
+  .comment_text {
     grid-row: 2;
     grid-column: 2 / span 2;
   }

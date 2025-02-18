@@ -10,3 +10,5 @@ com4
     except for the modal, all else is superficially done for both mobile and desktop. 
 com5
     added the modal.
+com6
+    the score number now changes, added the specific comment elements for the current active user, added the hover effect on clicable elements, defined the comments and user data and the comments_model service and maybe some more minor adjusts.

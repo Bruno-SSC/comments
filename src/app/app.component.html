@@ -1,15 +1,25 @@
-<app-delete-confirmation></app-delete-confirmation>
+<app-delete-confirmation
+  *ngIf="show_modal"
+  @modal_pop
+></app-delete-confirmation>
 
-<section class="layout_container">
-  <div class="comments_section">
-    <app-comment-card></app-comment-card>
-    <app-comment-card></app-comment-card>
-  </div>
+<section class="layout_container" @page_animation>
+  <ng-container *ngFor="let comment of comments">
+    <div class="comments_section">
+      <app-comment-card
+        [comment]="comment"
+        [active_user]="comment.user.username === active_user.name"
+      ></app-comment-card>
+    </div>
 
-  <div class="replies_section">
-    <app-comment-card></app-comment-card>
-    <app-comment-card></app-comment-card>
-  </div>
+    <div class="replies_section">
+      <app-comment-card
+        *ngFor="let reply of comment.replies"
+        [comment]="reply"
+        [active_user]="reply.user.username === active_user.name"
+      ></app-comment-card>
+    </div>
+  </ng-container>
 
   <div class="add_comment">
     <app-add-comment></app-add-comment>

@@ -42,12 +42,7 @@ const ladder_effect = [
 // ? Animations
 
 export const page_animation = trigger('page_animation', [
-  transition(':enter', [
-    query(
-      '.dessert_list__title,.dessert_container, .dessert_cart',
-      ladder_effect
-    ),
-  ]),
+  transition(':enter', [query('.comment_container', ladder_effect)]),
 ]);
 
 export const item_fade = trigger('item_fade', [
@@ -56,17 +51,11 @@ export const item_fade = trigger('item_fade', [
 ]);
 
 export const modal_pop = trigger('modal_pop', [
-  transition('void => show_mob', [
-    group([query('.confirm_order', move_in), query('.black_layer', fade_in)]),
+  transition('void => *', [
+    query('.modal_container, .modal_background', fade_in),
   ]),
-  transition('show_mob => void', [
-    group([query('.confirm_order', move_out), query('.black_layer', fade_out)]),
-  ]),
-  transition('void => show_desk', [
-    query('.confirm_order, .black_layer', fade_in),
-  ]),
-  transition('show_desk => void', [
-    query('.confirm_order, .black_layer', fade_out),
+  transition('* => void', [
+    query('.modal_container, .modal_background', fade_out),
   ]),
 ]);
 

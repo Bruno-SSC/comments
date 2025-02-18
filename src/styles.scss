@@ -11,6 +11,7 @@
 }
 
 body {
+  user-select: none;
   position: relative;
   background-color: $very_light_gray;
   min-height: 100vh;

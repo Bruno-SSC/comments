@@ -1,15 +1,25 @@
-export interface product_item {
+export interface user {
   image: {
-    thumbnail: string;
-    mobile: string;
-    tablet: string;
-    desktop: string;
+    png: string;
+    webp: string;
   };
-  name: string;
-  category: string;
-  price: number;
-  quantity: number;
-  selected?: boolean;
+  username: string;
+}
+
+interface base_comment {
+  id: number;
+  content: string;
+  created_at: string;
+  score: number;
+  user: user;
+}
+
+export interface comment extends base_comment {
+  replies: reply[];
+}
+
+export interface reply extends base_comment {
+  replyingTo: string;
 }
 
 export interface focusable_object {
@@ -17,11 +27,4 @@ export interface focusable_object {
   confirm: () => void;
   cancel: () => void;
   tag?: string;
-}
-
-export type update_types = 'increase' | 'decrease' | 'add';
-
-export interface output_event {
-  product_name: string;
-  update_type: update_types;
 }
