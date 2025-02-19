@@ -4,7 +4,7 @@
 ></app-delete-confirmation>
 
 <section class="layout_container" @page_animation>
-  <ng-container *ngFor="let comment of comments">
+  <ng-container *ngFor="let comment of comments; trackBy: track_by_id">
     <div class="comments_section">
       <app-comment-card
         [comment]="comment"
@@ -12,9 +12,9 @@
       ></app-comment-card>
     </div>
 
-    <div class="replies_section">
+    <div class="replies_section" *ngIf="comment.replies.length > 0">
       <app-comment-card
-        *ngFor="let reply of comment.replies"
+        *ngFor="let reply of comment.replies; trackBy: track_by_id"
         [comment]="reply"
         [active_user]="reply.user.username === active_user.name"
       ></app-comment-card>

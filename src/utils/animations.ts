@@ -9,7 +9,6 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { head } from 'lodash';
 
 // ? Effects
 
@@ -42,14 +41,14 @@ export const reply_move = trigger('reply_move', [
   transition(':enter', [
     query('.comment_container', [
       style({ transform: 'translateY(-150px)', opacity: 0 }),
-      animate('1500ms ease-in'),
-      style({ transform: 'translateY(0vh)', opacity: 1 }),
+      animate('300ms ease-in-out'),
+      style({ transform: 'translateY(0)', opacity: 1 }),
     ]),
   ]),
 
   transition(':leave', [
     query('.comment_container', [
-      animate('1500ms ease-out'),
+      animate('300ms ease-in-out'),
       style({ transform: 'translateY(-150px)', opacity: 0 }),
     ]),
   ]),
@@ -61,7 +60,7 @@ export const resize = trigger('resize', [
       query('@reply_move', animateChild()),
       query(':self', [
         style({ height: 0 }),
-        animate('1500ms ease-in-out'),
+        animate('300ms ease-in-out'),
         style({ height: '*' }),
       ]),
     ]),
@@ -70,7 +69,7 @@ export const resize = trigger('resize', [
   transition(':leave', [
     group([
       query('@reply_move', animateChild()),
-      query(':self', [animate('1500ms ease-in-out'), style({ height: '0' })]),
+      query(':self', [animate('300ms ease-in-out'), style({ height: '0' })]),
     ]),
   ]),
 ]);

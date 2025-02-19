@@ -1,6 +1,9 @@
-<section class="comment_container">
+<section class="comment_container" [id]="comment.id">
   <div class="comment_votes">
-    <div class="comment_votes__img_div" (click)="upvote_comment()">
+    <div
+      class="comment_votes__img_div"
+      (click)="upvote_comment(comment.id.toString())"
+    >
       <img
         class="comment_votes__upvote_icon"
         [src]="img_path + 'icon-plus.svg'"
@@ -8,9 +11,12 @@
       />
     </div>
 
-    <div class="comment_votes__number">{{ comment.score }}</div>
+    <div class="comment_votes__number" @item_fade>{{ comment.score }}</div>
 
-    <div class="comment_votes__img_div" (click)="downvote_comment()">
+    <div
+      class="comment_votes__img_div"
+      (click)="downvote_comment(comment.id.toString())"
+    >
       <img
         class="comment_votes__downvote_icon"
         [src]="img_path + 'icon-minus.svg'"
@@ -37,7 +43,7 @@
     <div
       class="comment_reply_btn"
       *ngIf="!active_user"
-      (click)="reply_action = !reply_action"
+      (click)="toggle_reply()"
     >
       <div class="comment_reply_btn__img_div">
         <img [src]="img_path + 'icon-reply.svg'" alt="reply comment button" />
@@ -69,7 +75,6 @@
   </div>
 </section>
 
-<!-- TODO: this element resizes at the same time the reply moves | the reply actino starts here -->
-<section class="hidden_reply" *ngIf="reply_action" @resize>
+<section class="hidden_reply" @resize *ngIf="reply_action">
   <app-add-comment @reply_move></app-add-comment>
 </section>

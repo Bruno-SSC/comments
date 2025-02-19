@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 .hidden_reply {
-  margin-top: 10px;
+  //margin-top: 10px; // this is why the element used to snap at the end of the shrink animation.
 }
 
 .comment_container {
