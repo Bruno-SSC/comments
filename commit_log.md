@@ -19,6 +19,11 @@ com8
     - How arrays/objecs reference works; 
     - the fact that emiting a new list in a observable recreates the references in the whole thing;
     - How angular tracks elements in the view by reference by default but can be changed with trackBy property;
-com9 
-    Solved the damn snaping problem for the reply animation. Solved the lack of properly fixed widths. Started taking some decisions since the design lacks it.
+com9
+    Solved the damn snaping problem for the reply animation. 
+    Solved the lack of properly fixed widths. 
+    Started taking some decisions since the design lacks it. 
     Currently, the edit form is there and i'm working on actually updating the component.
+com10
+    Added the edit action animatino of switching text for textfield, It took me some time to pull it off.
+    Added the update logic to make the edit action actually a working feature.

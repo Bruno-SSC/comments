@@ -56,6 +56,28 @@ export class CommentsModelService {
     this.$comments.next(current_list);
   }
 
+  update_content(comment_id: string, updated_content: string) {
+    const current_list = cloneDeep(this.$comments.getValue());
+
+    for (let i = 0; i < current_list.length; i++) {
+      let current_comment = current_list[i];
+      let found = false;
+
+      if (current_comment.id === Number(comment_id)) {
+        current_comment.content = updated_content;
+        found = true;
+      }
+
+      if (found) break;
+
+      for (let reply of current_comment.replies) {
+        if (reply.id === Number(comment_id)) reply.content = updated_content;
+      }
+    }
+
+    this.$comments.next(current_list);
+  }
+
   get_user(): user {
     return cloneDeep(this.current_user);
   }

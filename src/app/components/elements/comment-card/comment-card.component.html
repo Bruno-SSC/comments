@@ -34,7 +34,11 @@
   </div>
 
   <div class="comment_actions" *ngIf="!actions.edit">
-    <div class="comment_reply_btn" *ngIf="!active_user" (click)="show_reply()">
+    <div
+      class="comment_reply_btn"
+      *ngIf="!active_user"
+      (click)="this.actions.reply = !this.actions.reply"
+    >
       <div class="comment_reply_btn__img_div">
         <img [src]="img_path + 'icon-reply.svg'" alt="reply comment button" />
       </div>
@@ -63,14 +67,14 @@
     </div>
   </div>
 
-  <div class="comment_text" *ngIf="!actions.edit">
+  <div class="comment_text" *ngIf="!actions.edit" @item_fade>
     <span class="comment_text__reply_mention"> {{ reply_mention }} </span>
     {{ comment.content }}
   </div>
 
-  <div class="comment_form" *ngIf="actions.edit">
-    <textarea class="comment_form__textarea" id="comment_textarea">{{
-      reply_mention + ", " + comment.content
+  <div class="comment_form" *ngIf="actions.edit" @item_fade>
+    <textarea class="comment_form__textarea" id="updated_comment_content">{{
+      comment.content
     }}</textarea>
   </div>
 

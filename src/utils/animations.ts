@@ -31,7 +31,7 @@ export const page_animation = trigger('page_animation', [
 export const item_fade = trigger('item_fade', [
   transition(':enter', [
     style({ opacity: 0 }),
-    animate('500ms ease'),
+    animate('500ms 500ms ease'),
     style({ opacity: 1 }),
   ]),
   transition(':leave', [animate('500ms ease'), style({ opacity: 0 })]),
@@ -88,13 +88,4 @@ export const modal_pop = trigger('modal_pop', [
       style({ opacity: 0 }),
     ]),
   ]),
-]);
-
-export const btn_fade = trigger('btn_fade', [
-  transition(':enter', [
-    style({ opacity: 0 }),
-    animate('500ms ease'),
-    style({ opacity: 1 }),
-  ]),
-  transition(':leave', [animate('500ms ease'), style({ opacity: 0 })]),
 ]);

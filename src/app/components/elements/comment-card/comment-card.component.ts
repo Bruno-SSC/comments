@@ -41,12 +41,17 @@ export class CommentCardComponent {
     this.comments_model.downvote_comment(comment_id.toString());
   }
 
-  show_reply() {
-    this.actions.reply = !this.actions.reply;
-  }
-
   update_comment(comment_id: number) {
     this.actions.edit = false;
+
+    const updated_content = document.getElementById(
+      'updated_comment_content'
+    ) as HTMLTextAreaElement;
+
+    this.comments_model.update_content(
+      comment_id.toString(),
+      updated_content.value
+    );
   }
 
   get reply_mention(): string {
