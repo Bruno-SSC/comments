@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { comments, current_user } from 'src/utils/data';
-import { comment, user } from 'src/utils/interfaces';
+import { comment, reply, user } from 'src/utils/interfaces';
 import { cloneDeep } from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,73 +9,65 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CommentsModelService {
   $comments = new BehaviorSubject<comment[]>(comments);
+  cached_comments: comment[] = [];
   private current_user: user = current_user;
   private img_path: string = 'assets/images/';
 
-  upvote_comment(comment_id: string) {
-    const current_list = cloneDeep(this.$comments.getValue());
+  update_comments(updated_list: comment[]): void {
+    this.$comments.next(updated_list);
+  }
 
-    for (let i = 0; i < current_list.length; i++) {
-      let current_comment = current_list[i];
-      let found = false;
+  find_position(comment_id: string): number[] {
+    this.cached_comments = cloneDeep(this.$comments.getValue());
+    const c_list: comment[] = this.cached_comments;
+    const c_id: number = Number(comment_id);
+    const position: number[] = [0, 0];
 
-      if (current_comment.id === Number(comment_id)) {
-        current_comment.score += 1;
-        found = true;
+    for (let j = 0; j < c_list.length; j++) {
+      let current_c = c_list[j];
+
+      if (current_c.id === c_id) {
+        position[0] = j;
+        position[1] = -1;
+        return position;
       }
 
-      if (found) break;
-
-      for (let reply of current_comment.replies) {
-        reply.score += reply.id === Number(comment_id) ? 1 : 0;
+      for (let k in current_c.replies) {
+        const reply = current_c.replies[k];
+        if (reply.id !== c_id) continue;
+        position[0] = Number(j);
+        position[1] = Number(k);
+        return position;
       }
     }
 
-    this.$comments.next(current_list);
+    return position;
+  }
+
+  upvote_comment(comment_id: string) {
+    const c_pos = this.find_position(comment_id);
+    if (c_pos[1] < 0) this.cached_comments[c_pos[0]].score += 1;
+    else this.cached_comments[c_pos[0]].replies[c_pos[1]].score += 1;
+    this.$comments.next(this.cached_comments);
   }
 
   downvote_comment(comment_id: string) {
-    const current_list = cloneDeep(this.$comments.getValue());
-
-    for (let i = 0; i < current_list.length; i++) {
-      let current_comment = current_list[i];
-      let found = false;
-
-      if (current_comment.id === Number(comment_id)) {
-        current_comment.score -= 1;
-        found = true;
-      }
-
-      if (found) break;
-
-      for (let reply of current_comment.replies) {
-        reply.score -= reply.id === Number(comment_id) ? 1 : 0;
-      }
-    }
-
-    this.$comments.next(current_list);
+    const c_pos = this.find_position(comment_id);
+    if (c_pos[1] < 0) this.cached_comments[c_pos[0]].score -= 1;
+    else this.cached_comments[c_pos[0]].replies[c_pos[1]].score -= 1;
+    this.$comments.next(this.cached_comments);
   }
 
-  update_content(comment_id: string, updated_content: string) {
-    const current_list = cloneDeep(this.$comments.getValue());
+  update_content(comment_id: string, updated_content: string): string | void {
+    const c_pos = this.find_position(comment_id);
 
-    for (let i = 0; i < current_list.length; i++) {
-      let current_comment = current_list[i];
-      let found = false;
+    if (c_pos[0] < 0) return 'comment not found';
+    const comment = this.cached_comments[c_pos[0]];
 
-      if (current_comment.id === Number(comment_id)) {
-        current_comment.content = updated_content;
-        found = true;
-      }
+    if (c_pos[1] < 0) comment.content = updated_content;
+    else comment.replies[c_pos[1]].content = updated_content;
 
-      if (found) break;
-
-      for (let reply of current_comment.replies) {
-        if (reply.id === Number(comment_id)) reply.content = updated_content;
-      }
-    }
-
-    this.$comments.next(current_list);
+    this.$comments.next(this.cached_comments);
   }
 
   get_user(): user {

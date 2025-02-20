@@ -27,3 +27,5 @@ com9
 com10
     Added the edit action animatino of switching text for textfield, It took me some time to pull it off.
     Added the update logic to make the edit action actually a working feature.
+com11
+    Rewrited my comment_model service for a more cleaner/dry version.
