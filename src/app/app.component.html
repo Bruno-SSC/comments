@@ -3,16 +3,14 @@
   @modal_pop
 ></app-delete-confirmation>
 
-<section class="layout_container" @page_animation>
+<section class="layout" @page_animation>
   <ng-container *ngFor="let comment of comments; trackBy: track_by_id">
-    <div class="comments_section">
-      <app-comment-card
-        [comment]="comment"
-        [active_user]="comment.user.username === active_user.name"
-      ></app-comment-card>
-    </div>
+    <app-comment-card
+      [comment]="comment"
+      [active_user]="comment.user.username === active_user.name"
+    ></app-comment-card>
 
-    <div class="replies_section" *ngIf="comment.replies.length > 0">
+    <div class="replies" *ngIf="comment.replies.length > 0">
       <app-comment-card
         *ngFor="let reply of comment.replies; trackBy: track_by_id"
         [comment]="reply"
@@ -21,14 +19,12 @@
     </div>
   </ng-container>
 
-  <div class="add_comment">
-    <app-add-comment></app-add-comment>
-  </div>
-
-  <div class="attribution">
-    Challenge by
-    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-      >Frontend Mentor</a
-    >. Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <app-add-comment></app-add-comment>
 </section>
+
+<div class="attribution">
+  Challenge by
+  <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+    >Frontend Mentor</a
+  >. Coded by <a href="#">Your Name Here</a>.
+</div>

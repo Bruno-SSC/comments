@@ -14,6 +14,7 @@ export class AppComponent {
   show_modal: boolean = false;
   comments: comment[] = [];
   active_user: { name: string };
+  reply_action: boolean = false;
 
   constructor(private comments_model: CommentsModelService) {
     this.comments_model.$comments.subscribe((new_comments) => {

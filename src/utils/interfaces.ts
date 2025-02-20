@@ -6,6 +6,11 @@ export interface user {
   username: string;
 }
 
+export type action_types = 'reply' | 'edit' | 'delete';
+export type comment_actions = {
+  [key in action_types]: boolean;
+};
+
 interface base_comment {
   id: number;
   content: string;

@@ -1,7 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommentsModelService } from 'src/app/services/comments-model.service';
 import { item_fade, reply_move, resize } from 'src/utils/animations';
-import { comment, reply } from 'src/utils/interfaces';
+
+import {
+  action_types,
+  comment,
+  comment_actions,
+  reply,
+} from 'src/utils/interfaces';
 
 @Component({
   selector: 'app-comment-card',
@@ -10,39 +16,37 @@ import { comment, reply } from 'src/utils/interfaces';
   animations: [reply_move, resize, item_fade],
 })
 export class CommentCardComponent {
-  img_path: string;
-  reply_action: boolean = false;
   @Input() comment: comment | reply = {} as comment;
   @Input() active_user: boolean = false;
+
+  img_path: string;
+  view_element: HTMLElement = document.createElement('div');
+
+  actions: comment_actions = {
+    reply: false,
+    edit: false,
+    delete: false,
+  };
 
   constructor(private comments_model: CommentsModelService) {
     this.img_path = this.comments_model.get_img_path();
   }
 
-  upvote_comment(comment_id: string) {
-    this.comments_model.upvote_comment(comment_id);
+  upvote_comment(comment_id: number) {
+    this.comments_model.upvote_comment(comment_id.toString());
   }
 
-  downvote_comment(comment_id: string) {
+  downvote_comment(comment_id: number) {
     if (this.comment.score <= 0) return;
-    this.comments_model.downvote_comment(comment_id);
+    this.comments_model.downvote_comment(comment_id.toString());
   }
 
-  toggle_reply() {
-    this.reply_action = !this.reply_action;
+  show_reply() {
+    this.actions.reply = !this.actions.reply;
+  }
 
-    const comment_element = document.getElementById(
-      this.comment.id.toString()
-    ) as HTMLElement;
-
-    comment_element.style.marginBottom = '10px';
-    return;
-    // ! removing the margin after gives the same problem again.
-    if (this.reply_action) {
-    } else {
-      comment_element.style.height = '0px';
-      comment_element.style.marginBottom = '0px';
-    }
+  update_comment(comment_id: number) {
+    this.actions.edit = false;
   }
 
   get reply_mention(): string {

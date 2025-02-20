@@ -1,9 +1,6 @@
 <section class="comment_container" [id]="comment.id">
   <div class="comment_votes">
-    <div
-      class="comment_votes__img_div"
-      (click)="upvote_comment(comment.id.toString())"
-    >
+    <div class="comment_votes__img_div" (click)="upvote_comment(comment.id)">
       <img
         class="comment_votes__upvote_icon"
         [src]="img_path + 'icon-plus.svg'"
@@ -11,12 +8,9 @@
       />
     </div>
 
-    <div class="comment_votes__number" @item_fade>{{ comment.score }}</div>
+    <div class="comment_votes__number">{{ comment.score }}</div>
 
-    <div
-      class="comment_votes__img_div"
-      (click)="downvote_comment(comment.id.toString())"
-    >
+    <div class="comment_votes__img_div" (click)="downvote_comment(comment.id)">
       <img
         class="comment_votes__downvote_icon"
         [src]="img_path + 'icon-minus.svg'"
@@ -39,12 +33,8 @@
     <p class="comment_header__comment_time">{{ comment.created_at }}</p>
   </div>
 
-  <div class="comment_actions">
-    <div
-      class="comment_reply_btn"
-      *ngIf="!active_user"
-      (click)="toggle_reply()"
-    >
+  <div class="comment_actions" *ngIf="!actions.edit">
+    <div class="comment_reply_btn" *ngIf="!active_user" (click)="show_reply()">
       <div class="comment_reply_btn__img_div">
         <img [src]="img_path + 'icon-reply.svg'" alt="reply comment button" />
       </div>
@@ -60,7 +50,11 @@
       <span class="comment_delete_btn__text"> Delete </span>
     </div>
 
-    <div class="comment_edit_btn" *ngIf="active_user">
+    <div
+      class="comment_edit_btn"
+      *ngIf="active_user"
+      (click)="this.actions.edit = !this.actions.edit"
+    >
       <div class="comment_edit_btn__img_div">
         <img [src]="img_path + 'icon-edit.svg'" alt="delete comment button" />
       </div>
@@ -69,12 +63,31 @@
     </div>
   </div>
 
-  <div class="comment_text">
+  <div class="comment_text" *ngIf="!actions.edit">
     <span class="comment_text__reply_mention"> {{ reply_mention }} </span>
     {{ comment.content }}
   </div>
+
+  <div class="comment_form" *ngIf="actions.edit">
+    <textarea class="comment_form__textarea" id="comment_textarea">{{
+      reply_mention + ", " + comment.content
+    }}</textarea>
+  </div>
+
+  <div
+    class="edit_btn"
+    *ngIf="actions.edit"
+    (click)="update_comment(comment.id)"
+  >
+    UPDATE
+  </div>
 </section>
 
-<section class="hidden_reply" @resize *ngIf="reply_action">
+<section
+  [id]="'reply' + comment.id"
+  class="hidden_reply"
+  @resize
+  *ngIf="actions.reply"
+>
   <app-add-comment @reply_move></app-add-comment>
 </section>

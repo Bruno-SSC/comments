@@ -1,5 +1,9 @@
 @import "variables.scss";
 
+.white_space {
+  padding-top: 15px;
+}
+
 .comment_container {
   display: grid;
   grid-template: 2fr 1fr / 1fr 1fr;
