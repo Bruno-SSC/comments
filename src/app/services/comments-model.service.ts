@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { comments, current_user } from 'src/utils/data';
 import { comment, reply, user } from 'src/utils/interfaces';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, find } from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -10,11 +10,19 @@ import { BehaviorSubject } from 'rxjs';
 export class CommentsModelService {
   $comments = new BehaviorSubject<comment[]>(comments);
   cached_comments: comment[] = [];
+  last_id: number = 0;
   private current_user: user = current_user;
   private img_path: string = 'assets/images/';
 
-  update_comments(updated_list: comment[]): void {
-    this.$comments.next(updated_list);
+  constructor() {
+    this.cached_comments = cloneDeep(this.$comments.getValue());
+
+    for (let comment of this.cached_comments) {
+      this.last_id += 1;
+      for (let reply of comment.replies) {
+        this.last_id += 1;
+      }
+    }
   }
 
   find_position(comment_id: string): number[] {
@@ -67,6 +75,54 @@ export class CommentsModelService {
     if (c_pos[1] < 0) comment.content = updated_content;
     else comment.replies[c_pos[1]].content = updated_content;
 
+    this.$comments.next(this.cached_comments);
+  }
+
+  remove_comment(comment_id: number): void | string {
+    const c_pos = this.find_position(comment_id.toString());
+
+    if (c_pos[0] < 0) return 'comment not found';
+    const comment = this.cached_comments[c_pos[0]];
+
+    if (c_pos[1] < 0) {
+      this.cached_comments.splice(c_pos[0], 1);
+    } else {
+      comment.replies.splice(c_pos[1], 1);
+    }
+
+    this.$comments.next(this.cached_comments);
+  }
+
+  create_comment(content: string) {
+    this.cached_comments = cloneDeep(this.$comments.getValue());
+
+    const new_comment: comment = {
+      id: this.last_id + 1,
+      content,
+      created_at: '1s ago',
+      replies: [],
+      score: 0,
+      user: this.current_user,
+    };
+
+    this.cached_comments.push(new_comment);
+    this.$comments.next(this.cached_comments);
+  }
+
+  create_reply(comment_id: number, content: string) {
+    const c_pos = this.find_position(comment_id.toString());
+    const comment = this.cached_comments[c_pos[0]];
+
+    const new_reply: reply = {
+      id: this.last_id + 1,
+      content,
+      created_at: '1s ago',
+      replyingTo: comment.user.username,
+      score: 0,
+      user: this.current_user,
+    };
+
+    comment.replies.push(new_reply);
     this.$comments.next(this.cached_comments);
   }
 

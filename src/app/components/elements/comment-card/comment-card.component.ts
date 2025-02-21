@@ -54,6 +54,10 @@ export class CommentCardComponent {
     );
   }
 
+  remove_comment(comment_id: number) {
+    this.comments_model.remove_comment(comment_id);
+  }
+
   get reply_mention(): string {
     const reply = this.comment as reply;
     if (reply.replyingTo) return `@${reply.replyingTo}`;

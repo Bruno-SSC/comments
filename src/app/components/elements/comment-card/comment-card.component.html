@@ -46,7 +46,11 @@
       <p class="comment_reply_btn__text">Reply</p>
     </div>
 
-    <div class="comment_delete_btn" *ngIf="active_user">
+    <div
+      class="comment_delete_btn"
+      *ngIf="active_user"
+      (click)="remove_comment(comment.id)"
+    >
       <div class="comment_delete_btn__img_div">
         <img [src]="img_path + 'icon-delete.svg'" alt="delete comment button" />
       </div>
@@ -93,5 +97,10 @@
   @resize
   *ngIf="actions.reply"
 >
-  <app-add-comment @reply_move></app-add-comment>
+  <app-add-comment
+    @reply_move
+    [reply_instance]="true"
+    [comment_id]="comment.id"
+    (finish_reply)="actions.reply = false"
+  ></app-add-comment>
 </section>

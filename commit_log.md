@@ -29,3 +29,5 @@ com10
     Added the update logic to make the edit action actually a working feature.
 com11
     Rewrited my comment_model service for a more cleaner/dry version.
+com12
+    - added creation and removal of replies and comments
