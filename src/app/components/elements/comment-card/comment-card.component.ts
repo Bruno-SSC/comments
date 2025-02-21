@@ -1,19 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { CommentsModelService } from 'src/app/services/comments-model.service';
-import { item_fade, reply_move, resize } from 'src/utils/animations';
-
-import {
-  action_types,
-  comment,
-  comment_actions,
-  reply,
-} from 'src/utils/interfaces';
+import { content_fade, reply_move, resize } from 'src/utils/animations';
+import { comment, comment_actions, reply } from 'src/utils/interfaces';
 
 @Component({
   selector: 'app-comment-card',
   templateUrl: './comment-card.component.html',
   styleUrls: ['./comment-card.component.scss'],
-  animations: [reply_move, resize, item_fade],
+  animations: [reply_move, resize, content_fade],
 })
 export class CommentCardComponent {
   @Input() comment: comment | reply = {} as comment;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { modal_pop, page_animation } from 'src/utils/animations';
+import {  content_fade, modal_pop, page_animation } from 'src/utils/animations';
 import { CommentsModelService } from './services/comments-model.service';
 import { comment, reply } from 'src/utils/interfaces';
 
@@ -7,7 +7,7 @@ import { comment, reply } from 'src/utils/interfaces';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [modal_pop, page_animation],
+  animations: [modal_pop, page_animation, content_fade],
 })
 export class AppComponent {
   title = 'comments';

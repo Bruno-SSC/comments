@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { comments, current_user } from 'src/utils/data';
 import { comment, reply, user } from 'src/utils/interfaces';
-import { cloneDeep, find } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -10,23 +10,60 @@ import { BehaviorSubject } from 'rxjs';
 export class CommentsModelService {
   $comments = new BehaviorSubject<comment[]>(comments);
   cached_comments: comment[] = [];
-  last_id: number = 0;
   private current_user: user = current_user;
   private img_path: string = 'assets/images/';
 
   constructor() {
     this.cached_comments = cloneDeep(this.$comments.getValue());
+  }
+
+  generate_id(): number {
+    let count: number = 0;
 
     for (let comment of this.cached_comments) {
-      this.last_id += 1;
+      count += 1;
       for (let reply of comment.replies) {
-        this.last_id += 1;
+        count += 1;
       }
     }
+
+    return count;
+  }
+
+  create_comment(content: string) {
+    const new_comment: comment = {
+      id: this.generate_id() + 1,
+      content,
+      created_at: '1s ago',
+      replies: [],
+      score: 0,
+      user: this.current_user,
+    };
+
+    this.cached_comments.push(new_comment);
+    this.$comments.next(this.cached_comments);
+  }
+
+  create_reply(comment_id: number, content: string) {
+    const c_pos = this.find_position(comment_id.toString());
+    if (c_pos[0] < 0) return;
+
+    const comment = this.cached_comments[c_pos[0]];
+
+    const new_reply: reply = {
+      id: this.generate_id() + 1,
+      content,
+      created_at: '1s ago',
+      replyingTo: comment.user.username,
+      score: 0,
+      user: this.current_user,
+    };
+
+    comment.replies.push(new_reply);
+    this.$comments.next(this.cached_comments);
   }
 
   find_position(comment_id: string): number[] {
-    this.cached_comments = cloneDeep(this.$comments.getValue());
     const c_list: comment[] = this.cached_comments;
     const c_id: number = Number(comment_id);
     const position: number[] = [0, 0];
@@ -90,39 +127,6 @@ export class CommentsModelService {
       comment.replies.splice(c_pos[1], 1);
     }
 
-    this.$comments.next(this.cached_comments);
-  }
-
-  create_comment(content: string) {
-    this.cached_comments = cloneDeep(this.$comments.getValue());
-
-    const new_comment: comment = {
-      id: this.last_id + 1,
-      content,
-      created_at: '1s ago',
-      replies: [],
-      score: 0,
-      user: this.current_user,
-    };
-
-    this.cached_comments.push(new_comment);
-    this.$comments.next(this.cached_comments);
-  }
-
-  create_reply(comment_id: number, content: string) {
-    const c_pos = this.find_position(comment_id.toString());
-    const comment = this.cached_comments[c_pos[0]];
-
-    const new_reply: reply = {
-      id: this.last_id + 1,
-      content,
-      created_at: '1s ago',
-      replyingTo: comment.user.username,
-      score: 0,
-      user: this.current_user,
-    };
-
-    comment.replies.push(new_reply);
     this.$comments.next(this.cached_comments);
   }
 

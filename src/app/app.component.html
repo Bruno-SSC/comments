@@ -8,6 +8,7 @@
     <app-comment-card
       [comment]="comment"
       [active_user]="comment.user.username === active_user.name"
+      @content_fade
     ></app-comment-card>
 
     <div class="replies" *ngIf="comment.replies.length > 0">
@@ -15,6 +16,7 @@
         *ngFor="let reply of comment.replies; trackBy: track_by_id"
         [comment]="reply"
         [active_user]="reply.user.username === active_user.name"
+        @content_fade
       ></app-comment-card>
     </div>
   </ng-container>

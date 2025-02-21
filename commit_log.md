@@ -31,3 +31,8 @@ com11
     Rewrited my comment_model service for a more cleaner/dry version.
 com12
     - added creation and removal of replies and comments
+com13 
+    - fixed "id" generation
+    - fixed text content of new comments fading in after the comment iself
+    - added fade animations for new replies and comments
+    - fixed fade out animation not triggering upon delete

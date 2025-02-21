@@ -71,12 +71,12 @@
     </div>
   </div>
 
-  <div class="comment_text" *ngIf="!actions.edit" @item_fade>
+  <div class="comment_text" *ngIf="!actions.edit" @content_fade>
     <span class="comment_text__reply_mention"> {{ reply_mention }} </span>
     {{ comment.content }}
   </div>
 
-  <div class="comment_form" *ngIf="actions.edit" @item_fade>
+  <div class="comment_form" *ngIf="actions.edit" @content_fade>
     <textarea class="comment_form__textarea" id="updated_comment_content">{{
       comment.content
     }}</textarea>
