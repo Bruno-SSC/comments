@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {  content_fade, modal_pop, page_animation } from 'src/utils/animations';
+import { content_fade, modal_pop, page_animation } from 'src/utils/animations';
 import { CommentsModelService } from './services/comments-model.service';
 import { comment, reply } from 'src/utils/interfaces';
 
@@ -17,6 +17,10 @@ export class AppComponent {
   reply_action: boolean = false;
 
   constructor(private comments_model: CommentsModelService) {
+    this.comments_model.$delete_confirmation.subscribe((value) => {
+      this.show_modal = value;
+    });
+
     this.comments_model.$comments.subscribe((new_comments) => {
       this.comments = new_comments;
     });

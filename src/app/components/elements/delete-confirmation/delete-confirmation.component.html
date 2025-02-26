@@ -9,8 +9,10 @@
     </div>
 
     <div class="modal_btns">
-      <div class="modal_btns__cancel">NO, CANCEL</div>
-      <div class="modal_btns__confirm">YES, DELETE</div>
+      <div class="modal_btns__cancel" (click)="hide_modal()">NO, CANCEL</div>
+      <div class="modal_btns__confirm" (click)="remove_comment()">
+        YES, DELETE
+      </div>
     </div>
   </div>
 </section>

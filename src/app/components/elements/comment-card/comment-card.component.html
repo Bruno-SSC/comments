@@ -37,7 +37,7 @@
     <div
       class="comment_reply_btn"
       *ngIf="!active_user"
-      (click)="this.actions.reply = !this.actions.reply"
+      (click)="reply_comment()"
     >
       <div class="comment_reply_btn__img_div">
         <img [src]="img_path + 'icon-reply.svg'" alt="reply comment button" />
@@ -100,6 +100,7 @@
   <app-add-comment
     @reply_move
     [reply_instance]="true"
+    [reply_adress]="reply_adress"
     [comment_id]="comment.id"
     (finish_reply)="actions.reply = false"
   ></app-add-comment>

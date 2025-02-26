@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import { comments, current_user } from 'src/utils/data';
 import { comment, reply, user } from 'src/utils/interfaces';
 import { cloneDeep } from 'lodash';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+
+// ! Potencial problem: this service is not a singleton. Each component is instanciating it, thus each instance his it's own "current version" of cached_comments.
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommentsModelService {
+  $delete_confirmation = new Subject<boolean>();
   $comments = new BehaviorSubject<comment[]>(comments);
   cached_comments: comment[] = [];
+  cached_id: number = -1;
   private current_user: user = current_user;
   private img_path: string = 'assets/images/';
 
@@ -44,9 +48,9 @@ export class CommentsModelService {
     this.$comments.next(this.cached_comments);
   }
 
-  create_reply(comment_id: number, content: string) {
+  create_reply(comment_id: number, content: string, reply_adress: string) {
     const c_pos = this.find_position(comment_id.toString());
-    if (c_pos[0] < 0) return;
+    if (c_pos[0] < 0 || comment_id < 0) return;
 
     const comment = this.cached_comments[c_pos[0]];
 
@@ -54,7 +58,7 @@ export class CommentsModelService {
       id: this.generate_id() + 1,
       content,
       created_at: '1s ago',
-      replyingTo: comment.user.username,
+      replyingTo: reply_adress,
       score: 0,
       user: this.current_user,
     };
@@ -115,8 +119,18 @@ export class CommentsModelService {
     this.$comments.next(this.cached_comments);
   }
 
-  remove_comment(comment_id: number): void | string {
-    const c_pos = this.find_position(comment_id.toString());
+  show_removal_modal(comment_id: number) {
+    this.$delete_confirmation.next(true);
+    this.cached_id = comment_id;
+  }
+
+  hide_removal_modal() {
+    this.$delete_confirmation.next(false);
+  }
+
+  remove_comment(): void | string {
+    const comment_id: string = this.cached_id.toString();
+    const c_pos = this.find_position(comment_id);
 
     if (c_pos[0] < 0) return 'comment not found';
     const comment = this.cached_comments[c_pos[0]];

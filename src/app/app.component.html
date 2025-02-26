@@ -1,8 +1,3 @@
-<app-delete-confirmation
-  *ngIf="show_modal"
-  @modal_pop
-></app-delete-confirmation>
-
 <section class="layout" @page_animation>
   <ng-container *ngFor="let comment of comments; trackBy: track_by_id">
     <app-comment-card
@@ -30,3 +25,8 @@
     >Frontend Mentor</a
   >. Coded by <a href="#">Your Name Here</a>.
 </div>
+
+<app-delete-confirmation
+  *ngIf="show_modal"
+  @modal_pop
+></app-delete-confirmation>

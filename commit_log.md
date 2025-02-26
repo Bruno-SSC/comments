@@ -36,3 +36,7 @@ com13
     - fixed text content of new comments fading in after the comment iself
     - added fade animations for new replies and comments
     - fixed fade out animation not triggering upon delete
+com14 
+    - fixed the reply_adress begin wrong when replying for a reply.
+    - added the comment removal confirmation.
+   

@@ -13,6 +13,7 @@ export class CommentCardComponent {
   @Input() comment: comment | reply = {} as comment;
   @Input() active_user: boolean = false;
 
+  reply_adress: string = '';
   img_path: string;
   view_element: HTMLElement = document.createElement('div');
 
@@ -49,7 +50,12 @@ export class CommentCardComponent {
   }
 
   remove_comment(comment_id: number) {
-    this.comments_model.remove_comment(comment_id);
+    this.comments_model.show_removal_modal(comment_id);
+  }
+
+  reply_comment() {
+    this.actions.reply = !this.actions.reply;
+    this.reply_adress = this.comment.user.username;
   }
 
   get reply_mention(): string {

@@ -8,7 +8,8 @@ import { user } from 'src/utils/interfaces';
   styleUrls: ['./add-comment.component.scss'],
 })
 export class AddCommentComponent {
-  @Input() comment_id: undefined | number;
+  @Input() comment_id: number = -1;
+  @Input() reply_adress: string = '';
   @Input() reply_instance: boolean = false;
   @Output() finish_reply = new EventEmitter<void>();
 
@@ -23,7 +24,11 @@ export class AddCommentComponent {
   new_comment(content: string): void {
     if (this.reply_instance && this.comment_id) {
       this.finish_reply.emit();
-      this.comments_model.create_reply(this.comment_id, content);
+      this.comments_model.create_reply(
+        this.comment_id,
+        content,
+        this.reply_adress
+      );
     } else {
       this.comments_model.create_comment(content);
     }
