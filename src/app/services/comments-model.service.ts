@@ -10,6 +10,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class CommentsModelService {
+  static ID_counter: number = 5;
   $delete_confirmation = new Subject<boolean>();
   $comments = new BehaviorSubject<comment[]>(comments);
   cached_comments: comment[] = [];
@@ -21,22 +22,9 @@ export class CommentsModelService {
     this.cached_comments = cloneDeep(this.$comments.getValue());
   }
 
-  generate_id(): number {
-    let count: number = 0;
-
-    for (let comment of this.cached_comments) {
-      count += 1;
-      for (let reply of comment.replies) {
-        count += 1;
-      }
-    }
-
-    return count;
-  }
-
   create_comment(content: string) {
     const new_comment: comment = {
-      id: this.generate_id() + 1,
+      id: CommentsModelService.ID_counter,
       content,
       created_at: '1s ago',
       replies: [],
@@ -44,6 +32,7 @@ export class CommentsModelService {
       user: this.current_user,
     };
 
+    CommentsModelService.ID_counter += 1;
     this.cached_comments.push(new_comment);
     this.$comments.next(this.cached_comments);
   }
@@ -55,7 +44,7 @@ export class CommentsModelService {
     const comment = this.cached_comments[c_pos[0]];
 
     const new_reply: reply = {
-      id: this.generate_id() + 1,
+      id: CommentsModelService.ID_counter,
       content,
       created_at: '1s ago',
       replyingTo: reply_adress,
@@ -63,6 +52,7 @@ export class CommentsModelService {
       user: this.current_user,
     };
 
+    CommentsModelService.ID_counter += 1;
     comment.replies.push(new_reply);
     this.$comments.next(this.cached_comments);
   }

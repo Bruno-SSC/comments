@@ -1,4 +1,4 @@
-<section class="comment_container" [id]="comment.id">
+<section class="comment_container" [id]="comment.id" #teste>
   <div class="comment_votes">
     <div class="comment_votes__img_div" (click)="upvote_comment(comment.id)">
       <img
@@ -77,7 +77,7 @@
   </div>
 
   <div class="comment_form" *ngIf="actions.edit" @content_fade>
-    <textarea class="comment_form__textarea" id="updated_comment_content">{{
+    <textarea class="comment_form__textarea" #updated_content>{{
       comment.content
     }}</textarea>
   </div>
@@ -97,11 +97,9 @@
   @resize
   *ngIf="actions.reply"
 >
-  <app-add-comment
+  <app-reply-card
     @reply_move
-    [reply_instance]="true"
-    [reply_adress]="reply_adress"
-    [comment_id]="comment.id"
+    [input_data]="reply_data"
     (finish_reply)="actions.reply = false"
-  ></app-add-comment>
+  ></app-reply-card>
 </section>

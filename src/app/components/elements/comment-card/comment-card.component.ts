@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommentsModelService } from 'src/app/services/comments-model.service';
 import { content_fade, reply_move, resize } from 'src/utils/animations';
 import { comment, comment_actions, reply } from 'src/utils/interfaces';
@@ -10,6 +10,7 @@ import { comment, comment_actions, reply } from 'src/utils/interfaces';
   animations: [reply_move, resize, content_fade],
 })
 export class CommentCardComponent {
+  @ViewChild('updated_content') updated_content_ref!: ElementRef;
   @Input() comment: comment | reply = {} as comment;
   @Input() active_user: boolean = false;
 
@@ -38,15 +39,8 @@ export class CommentCardComponent {
 
   update_comment(comment_id: number) {
     this.actions.edit = false;
-
-    const updated_content = document.getElementById(
-      'updated_comment_content'
-    ) as HTMLTextAreaElement;
-
-    this.comments_model.update_content(
-      comment_id.toString(),
-      updated_content.value
-    );
+    const value = this.updated_content_ref.nativeElement.value;
+    this.comments_model.update_content(comment_id.toString(), value);
   }
 
   remove_comment(comment_id: number) {
@@ -62,5 +56,13 @@ export class CommentCardComponent {
     const reply = this.comment as reply;
     if (reply.replyingTo) return `@${reply.replyingTo}`;
     else return '';
+  }
+
+  get reply_data() {
+    return {
+      reply_adress: this.reply_adress,
+      comment_id: this.comment.id,
+      reply_instance: true,
+    };
   }
 }

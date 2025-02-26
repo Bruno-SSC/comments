@@ -39,4 +39,9 @@ com13
 com14 
     - fixed the reply_adress begin wrong when replying for a reply.
     - added the comment removal confirmation.
-   
+com15
+    - split comment and reply forms.
+    - fixed the autoincrement IDs duplicating.
+    - fixed concurrently multi-instance editing bug of using/updating only first instance content.
+    - fixed comment unlimited grow based on input text.
+    

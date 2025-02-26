@@ -11,6 +11,11 @@ export type comment_actions = {
   [key in action_types]: boolean;
 };
 
+export interface reply_input_data {
+  comment_id: number;
+  reply_adress: string;
+}
+
 interface base_comment {
   id: number;
   content: string;

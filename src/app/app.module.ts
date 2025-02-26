@@ -7,9 +7,16 @@ import { AppComponent } from './app.component';
 import { CommentCardComponent } from './components/elements/comment-card/comment-card.component';
 import { AddCommentComponent } from './components/elements/add-comment/add-comment.component';
 import { DeleteConfirmationComponent } from './components/elements/delete-confirmation/delete-confirmation.component';
+import { ReplyCardComponent } from './components/elements/reply-card/reply-card.component';
 
 @NgModule({
-  declarations: [AppComponent, CommentCardComponent, AddCommentComponent, DeleteConfirmationComponent],
+  declarations: [
+    AppComponent,
+    CommentCardComponent,
+    AddCommentComponent,
+    DeleteConfirmationComponent,
+    ReplyCardComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],

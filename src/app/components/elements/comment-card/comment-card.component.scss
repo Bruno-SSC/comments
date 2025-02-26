@@ -6,7 +6,7 @@
   grid-template-rows: 0.5fr 2fr 0.5fr;
   gap: 10px;
   width: 100%;
-  height: min(300px, auto);
+  height: min(300px, 100%);
   background-color: $white;
   padding: 20px;
   font-size: 1rem;
@@ -92,6 +92,13 @@
   grid-column: 1 / span 2;
   color: $grayish_blue;
   line-height: 1.5em;
+  max-height: 100px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.comment_text::-webkit-scrollbar {
+  display: none;
 }
 
 .comment_text__reply_mention {
