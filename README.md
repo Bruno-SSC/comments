@@ -2,7 +2,7 @@
 
 ## Status 🔧
 
-Currently under development.
+Mostly completed.
 
 ## Requirements 📄
 
@@ -12,17 +12,16 @@ FrontendMentor challenge requirements:
 - Upvote and downvote comments
 - View the optimal layout for the app depending on the device's screen size
 - See hover states for all interactive elements on the page
-- Bonus: If you're building a purely front-end project, use localStorage to save the current state in the browser that persists when the browser is refreshed
 
 ## Alerts ⚡
 
 - > [FrontendMentor Challenge Page](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9)
 
-- > [Live Project Link](https://comments1.netlify.app/)
+- > [Live Project Link](https://comments1.netlify.app)
 
 ## Goal 📌
 
-- Project to be added to my angular portfolio.
+- Build projects for my angular portfolio.
 
 ---
 

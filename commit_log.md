@@ -44,4 +44,6 @@ com15
     - fixed the autoincrement IDs duplicating.
     - fixed concurrently multi-instance editing bug of using/updating only first instance content.
     - fixed comment unlimited grow based on input text.
+com16
+    - fixed the attribution
     
